@@ -20,58 +20,55 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text("Restaurant"),
-        ),
-
-        //ListView.builder(itemBuilder: (context, index))
-
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Restaurant",
-              style: GoogleFonts.lato(
-                textStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Restaurant",
+                style: GoogleFonts.lato(
+                  textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            Text(
-              "Recommendation for you!",
-              style: GoogleFonts.lato(
-                textStyle: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold),
+              Text(
+                "Recommendation for you!",
+                style: GoogleFonts.lato(
+                  textStyle: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            SizedBox(height: 25,),
-            Expanded(
-              child: FutureBuilder<dynamic>(
-                future: DefaultAssetBundle.of(context)
-                    .loadString('assets/local_restaurant.json'),
-                builder: (context, snapshot) {
-                  final List<Resto> resto = parseData(snapshot.data);
-                  return resto.isNotEmpty
-                      ? ListView.builder(
-                          itemCount: resto.length,
-                          itemBuilder: (context, index) {
-                            return _buildItems(context, resto[index]);
-                          })
-                      : Center(
-                          child: Text("No data found", style: GoogleFonts.lato(
-                            textStyle: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold),
-                          )),
-                        );
-                },
+              SizedBox(height: 25,),
+              Expanded(
+                child: FutureBuilder<dynamic>(
+                  future: DefaultAssetBundle.of(context)
+                      .loadString('assets/local_restaurant.json'),
+                  builder: (context, snapshot) {
+                    final List<Resto> resto = parseData(snapshot.data);
+                    return resto.isNotEmpty
+                        ? ListView.separated(
+                            itemCount: resto.length,
+                            itemBuilder: (context, index) {
+                              return _buildItems(context, resto[index]);
+                            }, separatorBuilder: (BuildContext context, int index) => Divider(),)
+                        : Center(
+                            child: Text("No data found", style: GoogleFonts.lato(
+                              textStyle: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold),
+                            )),
+                          );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

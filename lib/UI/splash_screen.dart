@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import 'home_page.dart';
@@ -14,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
     }); 
     super.initState();
@@ -31,7 +32,12 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(height: 300, width: 300,
             child: Lottie.asset('assets/food.json'),),
             const SizedBox(height: 10,),
-            const Text("Find Restaurant Here!")
+             Text("Find Restaurant Here!",  style: GoogleFonts.lato(
+              textStyle: const  TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),)
           ],
         ),
       ),
