@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:submission_fundamental/UI/resto_detail_page.dart';
 import 'package:submission_fundamental/blue_print/restoran_model.dart';
 
 
 class HomePage extends StatefulWidget {
+  static const routeName = '/home';
   const HomePage({Key? key}) : super(key: key);
 
   @override
@@ -26,35 +28,36 @@ class _HomePageState extends State<HomePage> {
         future: DefaultAssetBundle.of(context)
             .loadString('assets/local_restaurant.json'),
         builder: (context, snapshot) {
-          final List<RestaurantModel> resto = parseData(snapshot.data);
-
-          print("ini data resto "+resto.toString());
-
-          return ListView.builder(
+          final List<Resto> resto = parseData(snapshot.data);
+          return resto.length != 0 ? ListView.builder(
             itemCount: resto.length,
-            itemBuilder: (context, index) {
-           //   return _buildItems(context, resto[index].restaurant![index]);
-           //    print(resto[index].restaurant!.toString());
-              return resto.isEmpty ? Container() : ListTile(
-                title: Text(resto[index].restaurant![index].name![0]),
-              ) ;
-            },
-          );
+              itemBuilder: (context, index) {
+            return _buildItems(context, resto[index]);
+          }) :
+              Center(child: Text("data tidak ada"),);
+
         },
       ),
     );
   }
 
-  Widget _buildItems(BuildContext context, Restaurant data) {
+  Widget _buildItems(BuildContext context, Resto data) {
     return ListTile(
-      leading: ConstrainedBox(
-        constraints: const BoxConstraints(
-          minWidth: 44,
-          minHeight: 44,
-          maxWidth: 44,
-          maxHeight: 44,
+      onTap: (){
+        print("klik");
+        Navigator.pushNamed(context, RestoDetail.routeName, arguments: data);
+      },
+      leading: Hero(
+        tag: data.pictureId.toString(),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(
+            minWidth: 44,
+            minHeight: 44,
+            maxWidth: 66,
+            maxHeight: 66,
+          ),
+          child: Image.network(data.pictureId.toString(), fit: BoxFit.cover),
         ),
-        child: Image.network(data.pictureId.toString(), fit: BoxFit.cover),
       ),
       title: Text(data.name.toString()),
       subtitle: Text("${data.city.toString()}\n ${data.rating}"),
