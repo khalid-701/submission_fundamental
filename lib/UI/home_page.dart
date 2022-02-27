@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:submission_fundamental/UI/resto_detail_page.dart';
@@ -119,7 +116,6 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      //Text("${data.city.toString()}\n ${data.rating}"),
       isThreeLine: true,
     );
   }

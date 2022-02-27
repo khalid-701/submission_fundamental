@@ -12,14 +12,15 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     Future.delayed(Duration(seconds: 4), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-    }); 
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
+    });
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,15 +30,23 @@ class _SplashScreenState extends State<SplashScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 300, width: 350,
-            child: Lottie.asset('assets/food.json'),),
-            const SizedBox(height: 10,),
-             Text("Find Restaurant Here!",  style: GoogleFonts.lato(
-              textStyle: const  TextStyle(
-                  color: Colors.black,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold),
-            ),)
+            SizedBox(
+              height: 300,
+              width: 350,
+              child: Lottie.asset('assets/food.json'),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Find Restaurant Here!",
+              style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold),
+              ),
+            )
           ],
         ),
       ),

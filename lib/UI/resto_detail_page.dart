@@ -20,14 +20,13 @@ class RestoDetail extends StatelessWidget {
               ),
               preferredSize: const Size.fromHeight(4.0)),
           backgroundColor: Colors.white,
-          title: Text(
-            resto.name.toString(),  style: GoogleFonts.lato(
-            textStyle: const TextStyle(
-                color: Colors.black,
-                fontSize: 24,
-                fontWeight: FontWeight.bold),
-          )
-          ),
+          title: Text(resto.name.toString(),
+              style: GoogleFonts.lato(
+                textStyle: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              )),
         ),
         body: SingleChildScrollView(
           child: Container(
